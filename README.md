@@ -11,6 +11,7 @@ These have been tested on Ubuntu 18.04 Linux. The installation creates the follo
 
 ## Known Issues
 1. Django migrations for postgress database are not performed - this will prevent the API container from loading.
+2. This will not run on Windows operating systems.
 
 
 ## Contributing
