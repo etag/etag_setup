@@ -1,0 +1,15 @@
+--- /opt/etag/config/celery/code/celeryconfig.py
++++ /opt/etag/config/celery/code/celeryconfig.py
+@@ -19,1 +19,10 @@
+-CELERY_IMPORTS = ("cybercomq",)
++CELERY_IMPORTS = ("etagq","cybercomq")
++
++#https://github.com/celery/celery/issues/1564
++CELERYD_FORCE_EXECV = True
++
++DB_USERNAME = "etag_master"
++DB_PASSWORD = "etag_master"
++DB_NAME = "etag"
++DB_HOST = "cybercom_postgres"
++DB_PORT = "5432"
+

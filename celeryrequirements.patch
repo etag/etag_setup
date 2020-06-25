@@ -1,0 +1,15 @@
+--- /opt/etag/config/celery/code/requirements.txt
++++ /opt/etag/config/celery/code/requirements.txt
+@@ -1,6 +1,9 @@
+ celery==3.1.22
+ pymongo==3.2.1
+-paramiko
+-requests
++paramiko==1.16.0
++requests==2.9.1
++pandas==0.24.2
++sqlalchemy==1.3.3
+ https://github.com/ouinformatics/dockertask/zipball/master
++https://github.com/etag/etagq/zipball/test
+ https://github.com/cybercommons/cybercomq/zipball/master
+

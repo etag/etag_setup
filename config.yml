@@ -1,0 +1,18 @@
+# cyberCommons' config for ETAG
+default_context:
+    author: "ETAG"
+    application_title: "ETAG"
+    application_short_name: "etag"
+    nginx_server_name: "localhost"
+    use_ssl: "None"
+    ssl_valid_days: 3650
+    broker_host: "localhost"
+    broker_port: 5671
+    broker_vhost: "vhost"
+    broker_user: "quser"
+    broker_pass: "qpass"
+    queue_tasks_org: "cybercommons"
+    queue_tasks_repo: "cybercomq"
+    queue_tasks_branch: "master"
+    celery_concurrency: 4
+    application_install_directory: "/opt"

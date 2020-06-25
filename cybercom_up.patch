@@ -1,0 +1,59 @@
+--- /opt/etag/run/cybercom_up
++++ /opt/etag/run/cybercom_up
+@@ -17,17 +17,26 @@
+     -v etag_mongodata:/data/db:z \
+     -v /opt/etag/config/config.sh:/config.sh \
+     -v /opt/etag/config/addmongouser:/addmongouser \
+-    --entrypoint /addmongouser mongo
++    --entrypoint /addmongouser mongo:4
+   rm -f /opt/etag/config/thisisfirstrun
+ fi
+ 
+ docker run -d --name etag_mongo \
+   -v etag_mongodata:/data/db:z \
+   -v /opt/etag/config/ssl/backend:/ssl:z \
+-  mongo --sslMode requireSSL \
+-        --sslPEMKeyFile /ssl/server/mongodb.pem \
+-        --sslCAFile /ssl/testca/cacert.pem \
+-        --auth
++  mongo:4 \
++    --sslMode requireSSL \
++    --sslPEMKeyFile /ssl/server/mongodb.pem \
++    --sslCAFile /ssl/testca/cacert.pem \
++    --auth
++
++#Postgres
++echo "************** Postgres        ***********"
++docker run -d --name etag_postgres \
++  -e POSTGRES_PASSWORD=etag_master \
++  -v /data/postgres:/var/lib/postgresql/data \
++  -p 5432:5432 \
++  postgres:11
+ 
+ #Rabbitmq
+ echo "************** Rabbitmq        ***********"
+@@ -47,6 +56,7 @@
+ docker run -d --name etag_celery \
+   --link etag_rabbitmq:cybercom_rabbitmq \
+   --link etag_mongo:cybercom_mongo \
++  --link etag_postgres:cybercom_postgres \
+   -v /opt/etag/config/celery/code:/code:z \
+   -v /opt/etag/log:/log:z \
+   -v /opt/etag/data:/data:z \
+@@ -66,6 +76,7 @@
+ docker run -d --name etag_api \
+   --link etag_memcache:cybercom_memcache \
+   --link etag_mongo:cybercom_mongo \
++  --link etag_postgres:cybercom_postgres \
+   --link etag_rabbitmq:cybercom_rabbitmq \
+   -p 8080:8080 \
+   -v /opt/etag/config/ssl/backend:/ssl:z \
+@@ -91,6 +102,6 @@
+ #Configure and add-ons to containers
+ echo "******** Configure Cybercom **************"
+ 
+-echo "********* Celery Requires wget ************"
+-docker exec -it etag_celery apt-get install wget
++#echo "********* Celery Requires wget ************"
++#docker exec -it etag_celery apt-get install wget
+ 
