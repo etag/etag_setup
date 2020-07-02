@@ -1,7 +1,7 @@
 ETAG Setup Scripts
 ===
 
-!!! This is not intended for production or running on a public server! All credentials contained in these files should be changed before running. !!!
+!!! This is not intended for production or running on a public server! All credentials contained in these files should be changed before running as a public server !!!
 
 These scripts will install dependencies (install_deps.sh - run this one first) and configure the underlying [cyberCommons' framework](https://cybercom-docs.readthedocs.io/en/latest/) (install.sh) for the ETAG gateway.
 These have been tested on Ubuntu 18.04 Linux. The installation creates the following directories:
